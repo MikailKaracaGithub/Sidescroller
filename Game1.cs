@@ -19,7 +19,7 @@ namespace Side_Scroller
 
         Background _bg = new Background();
 
-        Player player = new Player();decimal a
+        Player _player = new Player();
         Song bgSong;
         public Game1()
         {
@@ -39,7 +39,10 @@ namespace Side_Scroller
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _bg._texture = Content.Load<Texture2D>("sky");
+            _bg._textureBG = Content.Load<Texture2D>("newBG");
+            _bg._textureMidground = Content.Load<Texture2D>("Midground");
+            _player.GraphicsViewport = graphics.GraphicsDevice.Viewport;
+
             this.bgSong = Content.Load<Song>("stal");
             MediaPlayer.Play(bgSong);
 
@@ -53,7 +56,7 @@ namespace Side_Scroller
         protected override void Update(GameTime gameTime)
         {
             _bg.UpdateBackground();
-            player.PlayerMovement();
+            _player.PlayerMovement();
             base.Update(gameTime);
 
         }
@@ -62,8 +65,7 @@ namespace Side_Scroller
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             _bg.DrawBackground(spriteBatch); // background
-            spriteBatch.DrawRectangle(0, 600, 1600, 200, Color.IndianRed, Color.White, 0);// foreground
-            player.DrawPlayer(spriteBatch);
+            _player.DrawPlayer(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
