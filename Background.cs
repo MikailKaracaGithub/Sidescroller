@@ -14,30 +14,30 @@ namespace Side_Scroller
 {
     public class Background
     {
-        public Texture2D texture;
-        public int speed;
+        public Texture2D _texture;
+        public int _scrollSpeed;
 
         public Vector2 bgPos1, bgPos2;
 
         // constructor
         public Background()
         {
-            texture = null;
+            _texture = null;
             bgPos1 = new Vector2(0, 0);
-            bgPos2 = new Vector2(2100,0);
-            speed = 5;
+            bgPos2 = new Vector2(2100,0); // Note to self! current placeholder width is 2100 when changing it remember to change this
+            _scrollSpeed = 3;
         }
 
         public void DrawBackground(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, bgPos1, Color.White);
-            spriteBatch.Draw(texture, bgPos2, Color.White);
+            spriteBatch.Draw(_texture, bgPos1, Color.White);
+            spriteBatch.Draw(_texture, bgPos2, Color.White);
         }
 
         public void UpdateBackground()
         {
-            bgPos1.X = bgPos1.X - speed;
-            bgPos2.X = bgPos2.X - speed;
+            bgPos1.X = bgPos1.X - _scrollSpeed;
+            bgPos2.X = bgPos2.X - _scrollSpeed;
 
             // Repeat
             if (bgPos1.X <= -2100)

@@ -17,14 +17,9 @@ namespace Side_Scroller
         const int _screenWidth = 800;
         const int _screenHeight = 800;
 
-        Texture2D _background;
         Background _bg = new Background();
 
-        Vector2 _backgroundPos = new Vector2(0, 0);
-        Vector2 _backgroundReset = new Vector2(-700, 0);
-
-        Player player = new Player();
-
+        Player player = new Player();decimal a
         Song bgSong;
         public Game1()
         {
@@ -44,7 +39,7 @@ namespace Side_Scroller
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _bg.texture = Content.Load<Texture2D>("sky");
+            _bg._texture = Content.Load<Texture2D>("sky");
             this.bgSong = Content.Load<Song>("stal");
             MediaPlayer.Play(bgSong);
 
@@ -57,7 +52,7 @@ namespace Side_Scroller
 
         protected override void Update(GameTime gameTime)
         {
-            _bg.UpdateBackground(gameTime);
+            _bg.UpdateBackground();
             player.PlayerMovement();
             base.Update(gameTime);
 
