@@ -18,7 +18,7 @@ namespace Side_Scroller
         const int _screenHeight = 800;
 
         Texture2D _background;
-
+        Background _bg = new Background();
 
         Vector2 _backgroundPos = new Vector2(0, 0);
         Vector2 _backgroundReset = new Vector2(-700, 0);
@@ -44,9 +44,10 @@ namespace Side_Scroller
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _background = Content.Load<Texture2D>("sky");
+            _bg.texture = Content.Load<Texture2D>("sky");
             this.bgSong = Content.Load<Song>("stal");
             MediaPlayer.Play(bgSong);
+
 
         }
         protected override void UnloadContent()
@@ -56,13 +57,7 @@ namespace Side_Scroller
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            _backgroundPos.X--;
-            if (_backgroundPos.X < _backgroundReset.X)
-            {
-                _backgroundPos.X = 0;
-            }
+            _bg.UpdateBackground(gameTime);
             player.PlayerMovement();
             base.Update(gameTime);
 
@@ -71,7 +66,7 @@ namespace Side_Scroller
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-            spriteBatch.Draw(_background, _backgroundPos, Color.White); // background
+            _bg.DrawBackground(spriteBatch); // background
             spriteBatch.DrawRectangle(0, 600, 1600, 200, Color.IndianRed, Color.White, 0);// foreground
             player.DrawPlayer(spriteBatch);
             spriteBatch.End();
