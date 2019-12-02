@@ -42,6 +42,8 @@ namespace Side_Scroller
             _bg._textureBG = Content.Load<Texture2D>("newBG");
             _bg._textureMidground = Content.Load<Texture2D>("Midground");
             _player.GraphicsViewport = graphics.GraphicsDevice.Viewport;
+            _player._dinoHead = Content.Load<Texture2D>("dinohead");
+            _player._dinoBody = Content.Load<Texture2D>("bodydino");
 
             this.bgSong = Content.Load<Song>("stal");
             MediaPlayer.Play(bgSong);
@@ -57,6 +59,7 @@ namespace Side_Scroller
         {
             _bg.UpdateBackground();
             _player.PlayerMovement();
+
             base.Update(gameTime);
 
         }

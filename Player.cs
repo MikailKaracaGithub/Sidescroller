@@ -10,7 +10,7 @@ namespace Side_Scroller
         private int _speed = 5;
         private int _sprint;
         private Vector2 charPos = new Vector2(200, 610);
-
+        
         private bool isRCollide = false;
         private bool isLCollide = false;
 
@@ -18,10 +18,15 @@ namespace Side_Scroller
         private float startY = 610, jumpspeed = 0;
         public Viewport GraphicsViewport;
 
+        public Texture2D _dinoHead;
+        public Texture2D _dinoBody;
+
+
         public void PlayerMovement()
         {
-            KeyboardState kState = Keyboard.GetState();
             BoundingBox();
+            KeyboardState kState = Keyboard.GetState();
+            
             if (kState.IsKeyDown(Keys.LeftShift))
             {
                 _sprint = 2;
@@ -88,8 +93,10 @@ namespace Side_Scroller
 
         public void DrawPlayer(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawRectangle((int)charPos.X, (int)charPos.Y - 60, 75, 60, Color.Red, Color.White, 0); // player
-            spriteBatch.DrawRectangle((int)charPos.X, (int)charPos.Y, 75, 100, Color.DarkGray, Color.White, 0); // player
+            Vector2 up = new Vector2(0, 60);
+            Vector2 charPosHead = charPos- up;
+            spriteBatch.Draw(_dinoHead,charPosHead, Color.White);
+            spriteBatch.Draw(_dinoBody,charPos, Color.White);
         }
     }
 }
