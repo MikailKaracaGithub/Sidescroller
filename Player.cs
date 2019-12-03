@@ -27,19 +27,19 @@ namespace Side_Scroller
             BoundingBox();
             KeyboardState kState = Keyboard.GetState();
             
-            if (kState.IsKeyDown(Keys.LeftShift))
-            {
-                _sprint = 2;
-            }
-            else if (kState.IsKeyUp(Keys.LeftShift))
-            {
-                _sprint = 0;
-            }
             if (isRCollide == false)
             {
                 if (kState.IsKeyDown(Keys.D))
                 {
                     charPos.X += _speed + _sprint;
+                }
+                if (kState.IsKeyDown(Keys.LeftShift))
+                {
+                    _sprint = 2;
+                }
+                else if (kState.IsKeyUp(Keys.LeftShift))
+                {
+                    _sprint = 0;
                 }
             }
             if (isLCollide == false)
@@ -47,6 +47,14 @@ namespace Side_Scroller
                 if (kState.IsKeyDown(Keys.A))
                 {
                     charPos.X -= _speed + _sprint;
+                }
+                if (kState.IsKeyDown(Keys.LeftShift))
+                {
+                    _sprint = 2;
+                }
+                else if (kState.IsKeyUp(Keys.LeftShift))
+                {
+                    _sprint = 0;
                 }
             }
            
