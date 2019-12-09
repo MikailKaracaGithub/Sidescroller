@@ -1,5 +1,4 @@
-﻿using GeoSketch;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,9 +9,6 @@ namespace Side_Scroller
         private int _speed = 5;
         private int _sprint;
         private Vector2 charPos = new Vector2(200, 610);
-        
-        private bool isRCollide = false;
-        private bool isLCollide = false;
 
         private bool jumping = false;
         private float startY = 610, jumpspeed = 0;
@@ -24,10 +20,9 @@ namespace Side_Scroller
 
         public void PlayerMovement()
         {
-            BoundingBox();
             KeyboardState kState = Keyboard.GetState();
-            
-            if (isRCollide == false)
+
+            if (IsCollidingRight() == false)
             {
                 if (kState.IsKeyDown(Keys.D))
                 {
@@ -42,7 +37,7 @@ namespace Side_Scroller
                     _sprint = 0;
                 }
             }
-            if (isLCollide == false)
+            if (IsCollidingLeft() == false)
             {
                 if (kState.IsKeyDown(Keys.A))
                 {
@@ -78,25 +73,13 @@ namespace Side_Scroller
                 }
             }
         }
-
-        public void BoundingBox()
+        private bool IsCollidingRight()
         {
-            if (charPos.X + 75 == GraphicsViewport.Width)
-            {
-                isRCollide = true;
-            }
-            else
-            {
-                isRCollide = false;
-            }
-            if (charPos.X == 0)
-            {
-                isLCollide = true;
-            }
-            else
-            {
-                isLCollide = false;
-            }
+            return charPos.X + 75 >= GraphicsViewport.Width;
+        }
+        private bool IsCollidingLeft()
+        {
+            return charPos.X <= 0;
         }
 
         public void DrawPlayer(SpriteBatch spriteBatch)

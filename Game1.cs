@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
-using GeoSketch;
 namespace Side_Scroller
 {
     /// <summary>
@@ -13,6 +12,8 @@ namespace Side_Scroller
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        TitleScreen _titleScreen = new TitleScreen();
 
         const int _screenWidth = 800;
         const int _screenHeight = 800;
@@ -44,6 +45,7 @@ namespace Side_Scroller
             _player.GraphicsViewport = graphics.GraphicsDevice.Viewport;
             _player._dinoHead = Content.Load<Texture2D>("dinohead");
             _player._dinoBody = Content.Load<Texture2D>("bodydino");
+            _titleScreen.pickle = Content.Load<Texture2D>("pickle");
 
             this.bgSong = Content.Load<Song>("stal");
             MediaPlayer.Play(bgSong);
@@ -69,6 +71,8 @@ namespace Side_Scroller
             spriteBatch.Begin();
             _bg.DrawBackground(spriteBatch); // background
             _player.DrawPlayer(spriteBatch);
+            _titleScreen.DrawTitleScreen(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

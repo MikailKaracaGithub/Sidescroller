@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:../midground.jpg;midground.jpg
 
+#begin 4000_screenshots_20170731115702_1.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:4000_screenshots_20170731115702_1.jpg;pickle.jpg
+
 #begin dinohead.png
 /importer:TextureImporter
 /processor:TextureProcessor

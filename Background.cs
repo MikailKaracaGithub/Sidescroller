@@ -21,7 +21,7 @@ namespace Side_Scroller
 
         public Vector2 bgPos1, bgPos2, midPos;
         
-        // constructor
+       
         public Background()
         {
             _textureBG = null;
