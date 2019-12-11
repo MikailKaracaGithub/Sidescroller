@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
+
 namespace Side_Scroller
 {
     /// <summary>
@@ -10,18 +10,20 @@ namespace Side_Scroller
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
-        TitleScreen _titleScreen = new TitleScreen();
+        private TitleScreen _titleScreen = new TitleScreen();
 
-        const int _screenWidth = 800;
-        const int _screenHeight = 800;
+        private const int _screenWidth = 800;
+        private const int _screenHeight = 800;
 
-        Background _bg = new Background();
+        private Background _bg = new Background();
 
-        Player _player = new Player();
-        Song bgSong;
+        private Player _player = new Player();
+        private Song bgSong;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -37,6 +39,7 @@ namespace Side_Scroller
 
             base.Initialize();
         }
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -45,38 +48,42 @@ namespace Side_Scroller
             _player.GraphicsViewport = graphics.GraphicsDevice.Viewport;
             _player._dinoHead = Content.Load<Texture2D>("dinohead");
             _player._dinoBody = Content.Load<Texture2D>("bodydino");
+            _player._dinoPlaceHolder = Content.Load<Texture2D>("DinoPlaceHolder");
             _titleScreen.pickle = Content.Load<Texture2D>("pickle");
 
+
             this.bgSong = Content.Load<Song>("stal");
+            
             MediaPlayer.Play(bgSong);
-
-
+            MediaPlayer.Volume = 0.1f;
         }
+
         protected override void UnloadContent()
         {
-            
         }
 
         protected override void Update(GameTime gameTime)
         {
             _bg.UpdateBackground();
             _player.PlayerMovement();
-
+            _player.UpdateSpriteSheetIndex();
             base.Update(gameTime);
-
         }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
+
+            _titleScreen.DrawTitleScreen(spriteBatch);
+
             _bg.DrawBackground(spriteBatch); // background
             _player.DrawPlayer(spriteBatch);
-            _titleScreen.DrawTitleScreen(spriteBatch);
+            _player.DrawTest(spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
-        
     }
 }
